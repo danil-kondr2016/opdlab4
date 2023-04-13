@@ -2,11 +2,14 @@
 <html>
 <head>
     <title>Решение квадратных уравнений</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 <h1>Решение квадратных уравнений</h1>
 
 <p>Квадратное уравнение &mdash; уравнение вида ax<sup>2</sup> + bx + c = 0, где a != 0.</p>
+
+<div class="coefs">
 
 <h2>Параметры квадратного уравнения</h2>
 
@@ -16,6 +19,8 @@
     <p>c = <input type="text" name="coef_c"></p>
     <p><input type="submit" value="Решить"></p>
 </form>
+
+</div>
 
 </body>
 </html>

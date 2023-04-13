@@ -1,0 +1,30 @@
+h1 {
+    text-align: center;
+}
+
+p.roots {
+    text-align: center;
+}
+
+.coefs {
+    text-align: center;
+    background: #EEE;
+    margin-left: 25%;
+    margin-right: 25%;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+div.solve {
+    background: #EEE;
+    margin-left: 25%;
+    margin-right: 25%;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+h2.solve {
+    text-align: center;
+}
