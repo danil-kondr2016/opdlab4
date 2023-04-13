@@ -25,11 +25,15 @@ def formula(a, b, c):
     result = "$"
     if a == 1:
         result += "x^2"
+    elif a == -1:
+        result += "-x^2"
     elif a != 0:
         result += f"{a:g}x^2"
 
     if b == 1:
         result += "x"
+    elif b == -1:
+        result += "-x"
     elif b != 0:
         result += f"{b:+g}x"
 
