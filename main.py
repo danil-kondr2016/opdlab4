@@ -1,44 +1,23 @@
-from flask import Flask, render_template, request
-from quadratic import formula, solve_quadratic
-
-app = Flask(__name__)
+import unittest
+from app import app
 
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+class TestCase(unittest.TestCase):
+    def setUp(self):
+        self.app = app.test_client()
 
+    def test_dg0(self):
+        resp = self.app.post('/answer', data={'coef_a': 1, 'coef_b': -5, 'coef_c': 6})
+        assert b'x_1 = 3.0' in resp.data
+        assert b'x_2 = 2.0' in resp.data
 
-@app.route('/answer', methods=['post', 'get'])
-def form():
-    if request.method == 'GET':
-        return render_template('get.html')
-    elif request.method == 'POST':
-        A = float(request.form.get('coef_a'))
-        B = float(request.form.get('coef_b'))
-        C = float(request.form.get('coef_c'))
+    def test_de0(self):
+        resp = self.app.post('/answer', data={'coef_a': 1, 'coef_b': -4, 'coef_c': 4})
+        assert b'x = 2.0' in resp.data
 
-        if A == 0:
-            return render_template('error.html',
-                                   formula=formula(A, B, C),
-                                   error="Данное уравнение не является квадратным.")
-
-        D, X1, X2 = solve_quadratic(A, B, C)
-
-        if D < 0:
-            return render_template('error.html',
-                                   formula=formula(A, B, C),
-                                   error=f"Дискриминант уравнения равен ${D}$. Уравнение не имеет действительных корней.")
-        elif D == 0:
-            return render_template('answer.html',
-                                   formula=formula(A, B, C),
-                                   x1=f"$x = {X1}$")
-        else:
-            return render_template('answer.html',
-                                   formula=formula(A, B, C),
-                                   x1=f"$x_1 = {X1}$",
-                                   x2=f"$x_2 = {X2}$")
-
+    def test_dl0(self):
+        resp = self.app.post('/answer', data={'coef_a': 1, 'coef_b': -5, 'coef_c': 7})
+        assert b'$-3.0$' in resp.data
 
 if __name__ == "__main__":
-    app.run()
+    unittest.main()
